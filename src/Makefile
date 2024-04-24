@@ -1,6 +1,7 @@
 # Compiler settings
 FC = gfortran
 FCFLAGS = -O3 -Wall
+# FFLAGS = -L/opt/homebrew/Cellar/netcdf-fortran/4.6.1/lib -lnetcdff -lnetcdf -I/opt/homebrew/Cellar/netcdf-fortran/4.6.1/include
 
 # Target name
 TARGET = main
@@ -19,7 +20,7 @@ $(TARGET): $(OBJ)
 	$(FC) $(FCFLAGS) -o $@ $^
 
 ../obj/%.o: %.F90
-	$(FC) $(FCFLAGS) -c -o $@ $<
+	$(FC) $(FCFLAGS) $(FFLAGS) -c -o $@ $<
 
 # Clean
 .PHONY: clean
