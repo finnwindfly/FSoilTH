@@ -4,7 +4,7 @@ module SoilConstantMod
     implicit none
     ! define all constant variables related to soil physics.
 
-    real(kind=16),parameter :: grav = 9.80616              ! acceleration ofgravity ~ m/s^2   
+    real(kind=16),parameter :: grav = 9.80616              ! acceleration ofgravity ~ m/s^2
     real(kind=16),parameter :: rho_fwater = 1.000e3        ! density of fresh water ~ kg/m^3
     real(kind=16),parameter :: rho_ice = 0.917e3           ! density of ice   ~ kg/m^3
     real(kind=8),parameter  :: Temp_frez_f = 273.16        ! freezing T of fresh water ~ K
