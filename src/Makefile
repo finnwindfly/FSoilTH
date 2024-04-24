@@ -12,6 +12,7 @@ SRCS = $(wildcard *.F90)
 OBJ = ../obj/ModelParameterMod.o \
       ../obj/SoilParameterMod.o \
 	  ../obj/SoilConstantMod.o \
+	  ../obj/TridiagonalMod.o \
 	  ../obj/Main.o
 
 $(TARGET): $(OBJ)
