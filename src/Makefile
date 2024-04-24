@@ -1,22 +1,24 @@
-#compiler setting
+# Compiler settings
 FC = gfortran
-FCFLAGE = -o3 -Wall
+FCFLAGS = -O3 -Wall
 
-#target name
-TARGET = helloworld
+# Target name
+TARGET = main
 
-#source file
-SRCS = helloworld.f90
+# Source files
+SRCS = $(wildcard *.F90)
+SRCS_WITHOUT_MAIN = $(filter-out Main.F90, $(SRCS))
 
-#objective file
-OBJ = helloworld.o
+# Object files
+OBJ = $(patsubst %.F90,%.o,$(SRCS_WITHOUT_MAIN)) Main.o
 
 $(TARGET): $(OBJ)
-	$(FC) $(FCFLAGE) -o $@ $^
+	$(FC) $(FCFLAGS) -o $@ $^
 
-%.o: %.f90
-	$(FC) $(FCFLAGE) -c -o $@ $<
+%.o: %.F90
+	$(FC) $(FCFLAGS) -c -o $@ $<
 
 # Clean
+.PHONY: clean
 clean:
 	rm -rf $(TARGET) $(OBJ) *.mod
