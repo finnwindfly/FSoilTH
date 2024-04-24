@@ -9,17 +9,17 @@ TARGET = main
 SRCS = $(wildcard *.F90)
 
 # Object files
-OBJ = ModelParameterMod.o \
-      SoilParameterMod.o \
-	  Main.o
+OBJ = ../obj/ModelParameterMod.o \
+      ../obj/SoilParameterMod.o \
+	  ../obj/Main.o
 
 $(TARGET): $(OBJ)
 	$(FC) $(FCFLAGS) -o $@ $^
 
-%.o: %.F90
+../obj/%.o: %.F90
 	$(FC) $(FCFLAGS) -c -o $@ $<
 
 # Clean
 .PHONY: clean
 clean:
-	rm -rf $(TARGET) $(OBJ) *.mod
+	rm -rf $(TARGET) $(OBJ) ../obj/*.o *.mod
