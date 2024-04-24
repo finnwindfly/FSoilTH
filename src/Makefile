@@ -7,10 +7,11 @@ TARGET = main
 
 # Source files
 SRCS = $(wildcard *.F90)
-SRCS_WITHOUT_MAIN = $(filter-out Main.F90, $(SRCS))
 
 # Object files
-OBJ = $(patsubst %.F90,%.o,$(SRCS_WITHOUT_MAIN)) Main.o
+OBJ = ModelParameterMod.o \
+      SoilParameterMod.o \
+	  Main.o
 
 $(TARGET): $(OBJ)
 	$(FC) $(FCFLAGS) -o $@ $^
