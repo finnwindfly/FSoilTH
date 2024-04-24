@@ -11,6 +11,7 @@ SRCS = $(wildcard *.F90)
 # Object files
 OBJ = ../obj/ModelParameterMod.o \
       ../obj/SoilParameterMod.o \
+	  ../obj/SoilConstantMod.o \
 	  ../obj/Main.o
 
 $(TARGET): $(OBJ)
