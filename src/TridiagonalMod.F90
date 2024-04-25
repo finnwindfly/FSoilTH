@@ -23,19 +23,19 @@ contains
     implicit none
     integer , intent(in)         :: lbj, ubj               ! lbinning and ubing level indices
     integer , intent(in)         :: jtop                   ! top level for each column
-    real(kind=16), intent(in)    :: a(lbj:ubj)             ! "a" left off diagonal oftridiagonal matrix
-    real(kind=16), intent(in)    :: b(lbj:ubj)             ! "b" diagonal column for tridiagonal matrix
-    real(kind=16), intent(in)    :: c(lbj:ubj)             ! "c" right off diagonal tridiagonal matrix
-    real(kind=16), intent(in)    :: r(lbj:ubj)             ! "r" forcing term of tridiagonal matrix
-    real(kind=16), intent(inout) :: u(lbj:ubj)             ! solution
+    real(kind=4), intent(in)    :: a(lbj:ubj)             ! "a" left off diagonal oftridiagonal matrix
+    real(kind=4), intent(in)    :: b(lbj:ubj)             ! "b" diagonal column for tridiagonal matrix
+    real(kind=4), intent(in)    :: c(lbj:ubj)             ! "c" right off diagonal tridiagonal matrix
+    real(kind=4), intent(in)    :: r(lbj:ubj)             ! "r" forcing term of tridiagonal matrix
+    real(kind=4), intent(inout) :: u(lbj:ubj)             ! solution
 !
 ! !REVISION HISTORY:
 ! Finn Windfly, Initial code, 2023.12.12
 
 ! !LOCAL VARIABLES:
     integer       :: j                 !indices
-    real(kind=16) :: gam(lbj:ubj)      !temporary
-    real(kind=16) :: bet               !temporary
+    real(kind=4) :: gam(lbj:ubj)      !temporary
+    real(kind=4) :: bet               !temporary
 
     ! solve the matrix
     bet = b(jtop)

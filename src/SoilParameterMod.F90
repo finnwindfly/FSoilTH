@@ -7,6 +7,6 @@ module SoilParameterMod
 !EOP
 
     ! define all constant variables related to soil parameters
-    integer(kind=8),parameter  :: nlevsoi = 20
+    integer,parameter  :: nlevsoi = 20
 
 end module SoilParameterMod

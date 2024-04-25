@@ -5,6 +5,7 @@ program main
     use SoilConstantMod
     use TridiagonalMod
     use SoilTypeMod
+    use SoilHydrologyMod
 
     implicit none
 
@@ -15,7 +16,7 @@ program main
     type(waterfluxtype):: water_flx
 
     integer, parameter :: n = 5  ! 矩阵大小
-    real(kind=16) :: a(n), b(n), c(n), r(n), u(n)  ! 矩阵和解向量
+    real(kind=4) :: a(n), b(n), c(n), r(n), u(n)  ! 矩阵和解向量
     integer :: i  ! 循环变量
 
     print *, author_name
@@ -41,5 +42,10 @@ program main
     call InitializeSoilData(soil_disc, soil_text, soil_hydr, soil_heat, water_flx)
     print *, "print clay data"
     print *, soil_text%clay_s
+
+    ! 计算土壤导水率与土壤基质势
+    call HydraulicProperties(soil_disc, soil_text, soil_hydr)
+    print *, "soil hydraulic conductivity"
+    print *,  soil_hydr%hk_s
 
 end program main

@@ -1,7 +1,7 @@
 !--------------------------------------------------------------------------------------------------
 module SoilTypeMod
 
-  use ModelParameterMod,  only : iulog, surfdataname
+  use ModelParameterMod,  only : surfdataname
   use SoilParameterMod,   only : nlevsoi
 
 
@@ -41,7 +41,7 @@ module SoilTypeMod
     real, allocatable :: tsoisnot_s(:)        ! soil tmeperature at n-1 time step
     real, allocatable :: thk_s(:)             ! soil thermal conductivity at z
     real, allocatable :: tk_s(:)              ! soil thermal conductivity at zi
-    real, allocatable :: cv_s(:)              ! soil heat capacity 
+    real, allocatable :: cv_s(:)              ! soil heat capacity
     real              :: eflx_gnet_s          ! one-dimensional energy flux into upper soil layer
     real              :: eflx_snsh_s          ! one-dimensional sensible heat into upper soil layer
     real              :: eflx_snsht_s         ! one-dimensional sensible heat at n-1 time into upper soil layer
@@ -103,7 +103,7 @@ contains
     do j = 2, nlevsoi
       soil_disc%zi_s(j) = 0.5*(soil_disc%z_s(j)+soil_disc%z_s(j+1))
     enddo
-    soil_disc%zi_s(nlevsoi+1) = soil_disc%z_s(nlevsoi) + 0.5*soil_disc%dz_s(nlevsoi)    
+    soil_disc%zi_s(nlevsoi+1) = soil_disc%z_s(nlevsoi) + 0.5*soil_disc%dz_s(nlevsoi)
 
 
     ! Allocate and initialize soil_text data (example values)
