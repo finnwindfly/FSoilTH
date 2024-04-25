@@ -22,8 +22,8 @@ module SoilTypeMod
   end type soiltexttype
 
   type, public :: soilhydrtype
-    real, allocatable :: h2osoi_liq_s(:)      ! liquid water in soil
-    real, allocatable :: h2osoi_ice_s(:)      ! ice water
+    real, allocatable :: h2osoi_liq_s(:)         ! liquid water in soil
+    real, allocatable :: h2osoi_ice_s(:)         ! ice water
     real, allocatable :: watsat_s(:)          ! volumetric soil water at saturation(porosity)
     real, allocatable :: eff_porosity_s(:)    ! effective porosity = porosity - vol_ice
     real, allocatable :: slopb_s(:)           ! the exponent B
@@ -125,8 +125,8 @@ contains
     ! Allocate soil_hydr data
     allocate(soil_hydr%hk_s(1:nlevsoi))             ; soil_hydr%hk_s(:)          = 0.0
     allocate(soil_hydr%h2osoi_liq_s(1:nlevsoi))
-    soil_hydr%h2osoi_liq_s  = (/20.325,17.1,18.6,18.3,18.1,18.1,18.1,18.1,18.1,18.1,18.1,&
-    18.1,18.1,18.1,18.1,18.1,18.1,18.1,18.1,18.1/)
+    soil_hydr%h2osoi_liq_s  = (/0.321, 0.322, 0.293, 0.293, 0.262, 0.262, 0.262, 0.134, 0.134, 0.134, &
+    0.134, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109/)
     allocate(soil_hydr%h2osoi_ice_s(1:nlevsoi))
     soil_hydr%h2osoi_ice_s  = (/0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0/)
     allocate(soil_hydr%watsat_s(1:nlevsoi))         ; soil_hydr%watsat_s(:)      = 0.0
@@ -141,11 +141,11 @@ contains
 
     ! Allocate soil_heat data
     allocate(soil_heat%tsoisno_s(1:nlevsoi))
-    soil_heat%tsoisno_s   = (/283.87,284.52,285.63,290.09,294.55,294.55,294.55,294.55,294.55&
-    ,294.55,294.55,294.55,294.55,294.55,294.55,294.55,294.55,294.55,294.55,294.55/)
+    soil_heat%tsoisno_s   = (/7.208, 6.975, 7.308, 7.308, 8.85, 8.85, 8.85, 7.22, 7.22, 7.22,&
+    5.488, 5.488, 5.488, 5.488, 5.488, 5.488, 5.488, 5.488, 5.488, 5.488/) + 273.15
     allocate(soil_heat%tsoisnot_s(1:nlevsoi))
-    soil_heat%tsoisnot_s  = (/283.99,284.66,285.7,290.14,294.57,294.57,294.57,294.57,294.57,&
-    294.57,294.57,294.57,294.57,294.57,294.57,294.57,294.57,294.57,294.57,294.57/)
+    soil_heat%tsoisnot_s  = (/6.774, 6.795, 7.324, 7.324, 8.86, 8.86, 8.86, 7.22, 7.22, 7.22,&
+    5.486, 5.486, 5.486, 5.486, 5.486, 5.486, 5.486, 5.486, 5.486, 5.486/) + 273.15
     allocate(soil_heat%thk_s(1:nlevsoi))            ; soil_heat%thk_s(:)         = 0.0
     allocate(soil_heat%tk_s(1:nlevsoi))             ; soil_heat%tk_s(:)          = 0.0
     allocate(soil_heat%cv_s(1:nlevsoi))             ; soil_heat%cv_s(:)          = 0.0

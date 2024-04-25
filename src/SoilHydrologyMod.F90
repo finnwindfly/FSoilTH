@@ -117,17 +117,6 @@ contains
 
       end do
 
-      print *, "soil_hydr%watsat_s"
-      print *, soil_hydr%watsat_s
-
-      print *, "soil_hydr%slopb_s"
-      print *, soil_hydr%slopb_s
-
-      print *, "soil_hydr%hk_s"
-      print *, soil_hydr%hk_s
-
-      print *, "soil_hydr%smp_s"
-      print *, soil_hydr%smp_s
 
     end associate
   end subroutine HydraulicProperties

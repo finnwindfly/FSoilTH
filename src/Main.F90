@@ -5,7 +5,7 @@ program main
     use SoilConstantMod
     use TridiagonalMod
     use SoilTypeMod
-    use SoilHydrologyMod
+    ! use SoilHydrologyMod
 
     implicit none
 
@@ -40,12 +40,14 @@ program main
 
     ! 输出type数据
     call InitializeSoilData(soil_disc, soil_text, soil_hydr, soil_heat, water_flx)
-    print *, "print clay data"
-    print *, soil_text%clay_s
+    print *, "print soil discretization"
+    print *, soil_disc%z_s
+    print *, soil_disc%dz_s
+    print *, soil_disc%zi_s
 
     ! 计算土壤导水率与土壤基质势
-    call HydraulicProperties(soil_disc, soil_text, soil_hydr)
-    print *, "soil hydraulic conductivity"
-    print *,  soil_hydr%hk_s
+    ! call HydraulicProperties(soil_disc, soil_text, soil_hydr)
+    ! print *, "soil hydraulic conductivity"
+    ! print *,  soil_hydr%hk_s
 
 end program main

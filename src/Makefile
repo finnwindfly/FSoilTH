@@ -15,7 +15,6 @@ OBJ = ../obj/ModelParameterMod.o \
 	  ../obj/SoilConstantMod.o \
 	  ../obj/TridiagonalMod.o \
 	  ../obj/SoilTypeMod.o \
-	  ../obj/SoilHydrologyMod.o \
 	  ../obj/Main.o
 
 $(TARGET): $(OBJ)
