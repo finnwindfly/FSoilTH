@@ -51,5 +51,7 @@ program main
     call HydraulicProperties(soil_disc, soil_text, soil_hydr)
     print *, "soil hydraulic conductivity"
     print *,  soil_hydr%hk_s
+    print *, "soil matrix potential"
+    print *,  soil_hydr%smp_s
 
 end program main
