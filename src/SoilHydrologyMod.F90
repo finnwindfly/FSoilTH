@@ -117,7 +117,6 @@ contains
 
       end do
 
-
     end associate
   end subroutine HydraulicProperties
 
@@ -228,14 +227,14 @@ contains
 
     !ARGUMENTS:
     implicit none
-    type(waterfluxtype)    ,intent(inout)  :: water_flx       
+    type(waterfluxtype)    ,intent(inout)  :: water_flx
 
     associate(qflx_top_soil    =>   water_flx%qflx_top_s, &
               qflx_surf        =>   water_flx%qflx_surf_s)
               !qflx_infl        =>   water_flx%qflx_infl_s)
 
       water_flx%qflx_infl_s = qflx_top_soil - qflx_surf
- 
+
       print *, 'qflx_infl_s equal:'
       print *, water_flx%qflx_infl_s
     end associate
@@ -251,21 +250,21 @@ contains
 
 
     implicit none
-    type(soildisctype)     ,intent(in)     :: soil_disc        
-    type(soilhydrtype)     ,intent(inout)  :: soil_hydr        
-    type(waterfluxtype)    ,intent(inout)  :: water_flx    
+    type(soildisctype)     ,intent(in)     :: soil_disc
+    type(soilhydrtype)     ,intent(inout)  :: soil_hydr
+    type(waterfluxtype)    ,intent(inout)  :: water_flx
 
     !LOCAL VARIABLES
     integer  :: j
     integer  :: jtop
     real(kind=4) :: zmm(1:nlevsoi)                !layer depth [mm]
     real(kind=4) :: dzmm(1:nlevsoi)               !layer thickness [mm]
-    real(kind=4) :: vol_liq(1:nlevsoi)             
-    real(kind=4) :: vol_ice(1:nlevsoi)           
-    real(kind=4) :: amx(1:nlevsoi)                
-    real(kind=4) :: bmx(1:nlevsoi)                
-    real(kind=4) :: cmx(1:nlevsoi)              
-    real(kind=4) :: rmx(1:nlevsoi)               
+    real(kind=4) :: vol_liq(1:nlevsoi)
+    real(kind=4) :: vol_ice(1:nlevsoi)
+    real(kind=4) :: amx(1:nlevsoi)
+    real(kind=4) :: bmx(1:nlevsoi)
+    real(kind=4) :: cmx(1:nlevsoi)
+    real(kind=4) :: rmx(1:nlevsoi)
     real(kind=4) :: den                           ! used in calculating qin, qout
     real(kind=4) :: dqidw0                        ! d(qin)/d(vol_liq(i-1))
     real(kind=4) :: dqidw1                        ! d(qin)/d(vol_liq(i))
@@ -274,13 +273,13 @@ contains
     real(kind=4) :: num                           ! used in calculating qin, qout
     real(kind=4) :: qin                           ! flux of water into soil layer [mm h2o/s]
     real(kind=4) :: qout                          ! flux of water out of soil layer [mm h2o/s]
-    real(kind=4) :: sdamp                         ! extrapolates soiwat dependence of evaporation                 
+    real(kind=4) :: sdamp                         ! extrapolates soiwat dependence of evaporation
     real(kind=4) :: dwat(1:nlevsoi)
-   
+
     associate(z              =>   soil_disc%z_s, &
               dz             =>   soil_disc%dz_s, &
               h2osoi_liq     =>   soil_hydr%h2osoi_liq_s, &
-              h2osoi_ice     =>   soil_hydr%h2osoi_ice_s, & 
+              h2osoi_ice     =>   soil_hydr%h2osoi_ice_s, &
               eff_porosity   =>   soil_hydr%eff_porosity_s, &
               watsat         =>   soil_hydr%watsat_s, &
               slopb          =>   soil_hydr%slopb_s, &
@@ -305,7 +304,7 @@ contains
         vol_liq(j) = min(eff_porosity(j),h2osoi_liq(j)/(dz(j)*rho_fwater))
       end do
 
-      !then set up the a, b, c, and r vectors for tridiagonal equations      
+      !then set up the a, b, c, and r vectors for tridiagonal equations
 
       ! Node j=1
       !set initial values:
@@ -360,11 +359,11 @@ contains
       cmx(j) =  0.0
 
       ! Solve for dwat
- 
+
       jtop = 1
       call Tridiagonal(1, nlevsoi, jtop, amx, bmx, cmx, rmx, dwat)
       water_flx%dwat_s = dwat
-      
+
       ! Renew the mass of liquid water
 
       do j= 1,nlevsoi
@@ -385,18 +384,18 @@ contains
     use SoilParameterMod,  only : nlevsoi
 
     implicit none
-    type(soildisctype)     ,intent(in)     :: soil_disc        
-    type(soilhydrtype)     ,intent(inout)  :: soil_hydr       
-    type(waterfluxtype)    ,intent(inout)  :: water_flx  
+    type(soildisctype)     ,intent(in)     :: soil_disc
+    type(soilhydrtype)     ,intent(inout)  :: soil_hydr
+    type(waterfluxtype)    ,intent(inout)  :: water_flx
 
     !OTHER LOCAL VARIABLES:
     integer  :: j                        !indices
     real(kind=4) :: xs                       !excess soil water above saturation
     real(kind=4) :: zmm(1:nlevsoi)
-    real(kind=4) :: dzmm(1:nlevsoi)          
-    real(kind=4) :: vol_liq(1:nlevsoi)        
+    real(kind=4) :: dzmm(1:nlevsoi)
+    real(kind=4) :: vol_liq(1:nlevsoi)
     real(kind=4) :: vol_ice(1:nlevsoi)
-    real(kind=4) :: wetness(1:nlevsoi)      
+    real(kind=4) :: wetness(1:nlevsoi)
     real(kind=4) :: watmin                   !minimum soil moisture
     real(kind=4) :: hksum                    !summation of hydraulic cond for layers 11->20
     real(kind=4) :: zsat                     !hydraulic conductivity weighted soil thickness
@@ -436,7 +435,7 @@ contains
         wetness(j) = min(1.0,(vol_ice(j)+vol_liq(j))/watsat(j))
       end do
 
-      ! initialize 
+      ! initialize
       qflx_drain     = 0.0      ! subsurface runoff
       qflx_drain_wet = 0.0      ! subsurface runoff
       qflx_drain_dry = 0.0      ! subsurface runoff
@@ -451,7 +450,7 @@ contains
         wsat = 0.0
         dzksum = 0.0
       end if
-      
+
       do j = 11,nlevsoi-1
         if (zwice <= 0. .AND. hksum > 0.) then
           zsat = zsat + dz(j)*hk(j)
@@ -477,13 +476,13 @@ contains
       end do
 
       ! Limit h2osoi_liq to be greater than or equal to watmin.
-      ! Get water needed to bring h2osoi_liq equal watmin from lower layer. 
+      ! Get water needed to bring h2osoi_liq equal watmin from lower layer.
       watmin = 0.0
       do j = 1, nlevsoi-1
         if (h2osoi_liq(j) < 0.) then
-             xs = watmin - h2osoi_liq(j)
+            xs = watmin - h2osoi_liq(j)
         else
-             xs = 0.0
+            xs = 0.0
         end if
         h2osoi_liq(j  ) = h2osoi_liq(j  ) + xs
         h2osoi_liq(j+1) = h2osoi_liq(j+1) - xs

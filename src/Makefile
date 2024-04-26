@@ -10,12 +10,13 @@ TARGET = main
 SRCS = $(wildcard *.F90)
 
 # Object files
-OBJ = ../obj/ModelParameterMod.o \
-      ../obj/SoilParameterMod.o \
-	  ../obj/SoilConstantMod.o \
-	  ../obj/TridiagonalMod.o \
-	  ../obj/SoilTypeMod.o \
-	  ../obj/Main.o
+OBJ =   ../obj/ModelParameterMod.o \
+        ../obj/SoilParameterMod.o \
+        ../obj/SoilConstantMod.o \
+        ../obj/TridiagonalMod.o \
+        ../obj/SoilTypeMod.o \
+        ../obj/SoilHydrologyMod.o \
+        ../obj/Main.o
 
 $(TARGET): $(OBJ)
 	$(FC) $(FCFLAGS) -o $@ $^

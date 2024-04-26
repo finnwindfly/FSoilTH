@@ -127,6 +127,9 @@ contains
     allocate(soil_hydr%h2osoi_liq_s(1:nlevsoi))
     soil_hydr%h2osoi_liq_s  = (/0.321, 0.322, 0.293, 0.293, 0.262, 0.262, 0.262, 0.134, 0.134, 0.134, &
     0.134, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109, 0.109/)
+    do j = 1, nlevsoi
+      soil_hydr%h2osoi_liq_s(j) = soil_hydr%h2osoi_liq_s(j) * soil_disc%dz_s(j) * 1000.0
+    enddo
     allocate(soil_hydr%h2osoi_ice_s(1:nlevsoi))
     soil_hydr%h2osoi_ice_s  = (/0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0/)
     allocate(soil_hydr%watsat_s(1:nlevsoi))         ; soil_hydr%watsat_s(:)      = 0.0
