@@ -60,4 +60,6 @@ program main
     print *, soil_hydr%zwt_s
     print *, "Surface Runoff"
     print *, water_flx%qflx_surf_s
+    print *, "Infiltration"
+    print *, water_flx%qflx_infl_s
 end program main
