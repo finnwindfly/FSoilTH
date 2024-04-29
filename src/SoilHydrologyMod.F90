@@ -366,8 +366,6 @@ contains
           soil_hydr%h2osoi_liq_s(j) = h2osoi_liq(j)  !update type data of h2osoi_liq
       end do
 
-      print *, 'updated h2osoi_liq_s:'
-      print *, soil_hydr%h2osoi_liq_s
     end associate
   end subroutine SoilWater
 
