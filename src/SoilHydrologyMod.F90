@@ -520,8 +520,6 @@ contains
       !  end if
       !end if
 
-      print *, 'qflx_drain :'
-      print *, water_flx%qflx_drain_s
     end associate
   end subroutine Drainage
 
