@@ -18,6 +18,9 @@ program main
     integer, parameter :: n = 5  ! 矩阵大小
     real(kind=4) :: a(n), b(n), c(n), r(n), u(n)  ! 矩阵和解向量
     integer :: i  ! 循环变量
+    real(kind=4) :: vol_liq(1:nlevsoi)
+    ! real(kind=4) :: vol_ice(1:nlevsoi)
+    ! real(kind=4) :: zero = 0.0
 
     print *, author_name
     print *, nlevsoi
@@ -62,4 +65,14 @@ program main
     print *, water_flx%qflx_surf_s
     print *, "Infiltration"
     print *, water_flx%qflx_infl_s
+
+    ! 计算土壤的水分upadate
+    call SoilWater(soil_hydr, soil_disc, water_flx)
+    print *, "update soil water"
+    do i=1,nlevsoi
+        ! Porosity of soil, partial volume of ice and liquid
+        ! vol_ice(i) = min(soil_hydr%watsat_s(i), zero))
+        vol_liq(i) = min(soil_hydr%eff_porosity_s(i),soil_hydr%h2osoi_liq_s(i)/(soil_disc%dz_s(i)*rho_fwater))
+    end do
+    print *, vol_liq
 end program main
