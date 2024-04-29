@@ -54,4 +54,10 @@ program main
     print *, "soil matrix potential"
     print *,  soil_hydr%smp_s
 
+    ! 计算土壤地表径流
+    call SurfaceRunoff(soil_hydr, soil_disc, water_flx)
+    print *, "water table depth"
+    print *, soil_hydr%zwt_s
+    print *, "Surface Runoff"
+    print *, water_flx%qflx_surf_s
 end program main

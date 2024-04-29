@@ -213,11 +213,6 @@ contains
         end if
       end do
 
-      print *, 'fcov_s equal:'
-      print *, soil_hydr%fcov_s
-
-      print *, 'qflx_surf_s equal:'
-      print *, water_flx%qflx_surf_s
     end associate
 
   end subroutine SurfaceRunoff
