@@ -75,4 +75,9 @@ program main
         vol_liq(i) = min(soil_hydr%eff_porosity_s(i),soil_hydr%h2osoi_liq_s(i)/(soil_disc%dz_s(i)*rho_fwater))
     end do
     print *, vol_liq
+
+    ! 计算drainage
+    call Drainage(soil_hydr, soil_disc, water_flx)
+    print *, "Drainage:"
+    print *, water_flx%qflx_drain_s
 end program main
