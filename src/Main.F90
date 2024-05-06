@@ -6,6 +6,7 @@ program main
     use TridiagonalMod
     use SoilTypeMod
     use SoilHydrologyMod
+    use SoilTemperatureMod
 
     implicit none
 
@@ -49,6 +50,8 @@ program main
     ! print *, soil_disc%zi_s
     print *, "Print soil initial h2osoi_liq_s"
     print *, soil_hydr%h2osoi_liq_s
+    print *, "Soil initilization temperature"
+    print *, soil_heat%tsoisno_s
 
     ! 计算土壤导水率与土壤基质势
     call HydraulicProperties(soil_disc, soil_text, soil_hydr)
@@ -80,4 +83,14 @@ program main
     call Drainage(soil_hydr, soil_disc, water_flx)
     print *, "Drainage:"
     print *, water_flx%qflx_drain_s
+
+    ! 计算土壤导热率
+    call SoilThermalPropers(soil_disc, soil_text, soil_heat, soil_hydr)
+    print *, "soil thermal capacity"
+    print *, soil_heat%cv_s
+
+    ! 计算土壤温度
+    call SoilTemperature(soil_disc, soil_heat)
+    print *, "SoilTemperature"
+    print *, soil_heat%tsoisno_s
 end program main
