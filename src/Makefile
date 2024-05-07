@@ -1,7 +1,7 @@
 # Compiler settings
 FC = gfortran
 FCFLAGS = -O3 -Wall
-# FFLAGS = -L/opt/homebrew/Cellar/netcdf-fortran/4.6.1/lib -lnetcdff -lnetcdf -I/opt/homebrew/Cellar/netcdf-fortran/4.6.1/include
+FFLAGS = -L/opt/homebrew/Cellar/netcdf-fortran/4.6.1/lib -lnetcdff -lnetcdf -I/opt/homebrew/Cellar/netcdf-fortran/4.6.1/include
 
 # Target name
 TARGET = main
@@ -15,6 +15,7 @@ OBJ =   ../obj/ModelParameterMod.o \
         ../obj/SoilConstantMod.o \
         ../obj/TridiagonalMod.o \
         ../obj/SoilTypeMod.o \
+        ../obj/NetcdfReadMod.o \
         ../obj/SoilHydrologyMod.o \
         ../obj/SoilTemperatureMod.o \
         ../obj/Main.o
