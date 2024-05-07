@@ -83,6 +83,8 @@ contains
           thk(j) = tkdry(j)
         endif
       enddo
+      print *, "thk :"
+      print *, thk
 
       ! Thermal conductivity at the layer interfaces
       do j = 1, nlevsoi
@@ -156,10 +158,10 @@ contains
 
       ! First calculate the upper boundary
       hs = eflx_gnet        !the energy flux into the upper layer of soil-snow
-      interm1 = 4.*emg * sb * tsoisno(1)**3
-      interm2 = ((eflx_snsh-eflx_snsht)/(tsoisno(1)-tsoisnot(1)))+ &
-              ((eflx_poth-eflx_poth)/(tsoisno(1)-tsoisnot(1)))
-      dhsdT =  - interm1 - interm2            !cgrnd will be calculated in BareGroundFluxesMod
+      ! interm1 = 4.*emg * sb * tsoisno(1)**3
+      ! interm2 = ((eflx_snsh-eflx_snsht)/(tsoisno(1)-tsoisnot(1)))+ &
+      !         ((eflx_poth-eflx_poth)/(tsoisno(1)-tsoisnot(1)))
+      ! dhsdT =  - interm1 - interm2            !cgrnd will be calculated in BareGroundFluxesMod
 
       ! second to determine if there have snow layers.
       do j = 1, nlevsoi
@@ -188,22 +190,20 @@ contains
             fn(j) = tk(j)*(tsoisno(j+1)-tsoisno(j))/(z(j+1)-z(j))
             dzp   = z(j+1)-z(j)
             amx(j) = 0.
-            bmx(j) = 1+(1.-cnfac)*fact(j)*tk(j)/dzp-fact(j)*dhsdT
+            bmx(j) = 1+(1.-cnfac)*fact(j)*tk(j)/dzp
             cmx(j) =  -(1.-cnfac)*fact(j)*tk(j)/dzp
-            rmx(j) = tsoisno(j) +  fact(j)*( hs - dhsdT*tsoisno(j) + cnfac*fn(j))
+            rmx(j) = tsoisno(j) +  fact(j)*(cnfac*fn(j) - hs)
           endif
         endif
+      end do
 
         ! Solve for tsoisno
-        jtop = 1
-        call Tridiagonal(1, nlevsoi, jtop, amx, bmx, cmx, rmx, tsoisno_in)
+      jtop = 1
+      call Tridiagonal(1, nlevsoi, jtop, amx, bmx, cmx, rmx, tsoisno_in)
 
-        soil_heat%tsoisno_s(j) = tsoisno_in(j)
-
-      end do
+      soil_heat%tsoisno_s = tsoisno_in
 
     end associate
   end subroutine SoilTemperature
-
 
 end module SoilTemperatureMod
