@@ -15,6 +15,9 @@ OBJ =   ../obj/ModelParameterMod.o \
         ../obj/SoilConstantMod.o \
         ../obj/TridiagonalMod.o \
         ../obj/SoilTypeMod.o \
+        ../obj/EmptyNetcdfMod.o \
+        ../obj/NetcdfReadMod.o \
+        ../obj/NetcdfWriteMod.o \
         ../obj/SoilHydrologyMod.o \
         ../obj/SoilTemperatureMod.o \
         ../obj/Main.o
