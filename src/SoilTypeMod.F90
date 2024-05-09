@@ -100,10 +100,11 @@ contains
     soil_disc%dz_s(nlevsoi) = soil_disc%z_s(nlevsoi) - soil_disc%z_s(nlevsoi-1)
 
     soil_disc%zi_s(1) = 0.
-    do j = 2, nlevsoi
+    do j = 2, nlevsoi-1
       soil_disc%zi_s(j) = 0.5*(soil_disc%z_s(j)+soil_disc%z_s(j+1))
     enddo
-    soil_disc%zi_s(nlevsoi+1) = soil_disc%z_s(nlevsoi) + 0.5*soil_disc%dz_s(nlevsoi)
+    soil_disc%zi_s(nlevsoi)   = soil_disc%z_s(nlevsoi) + 0.5*soil_disc%dz_s(nlevsoi)
+    soil_disc%zi_s(nlevsoi+1) = soil_disc%zi_s(nlevsoi) + 0.5*soil_disc%dz_s(nlevsoi)
 
 
     ! Allocate and initialize soil_text data (example values)

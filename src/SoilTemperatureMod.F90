@@ -83,13 +83,11 @@ contains
           thk(j) = tkdry(j)
         endif
       enddo
-      print *, "thk :"
-      print *, thk
 
       ! Thermal conductivity at the layer interfaces
       do j = 1, nlevsoi
         if (j <= nlevsoi-1) then
-          tk(j) = thk(j)*tk(j+1)*(z(j+1)-z(j))/(thk(j)*(z(j+1)-zi(j-1))+thk(j+1)*(zi(j-1)-z(j)))
+          tk(j) = thk(j)*thk(j+1)*(z(j+1)-z(j))/(thk(j)*(z(j+1)-zi(j+1))+thk(j+1)*(zi(j+1)-z(j)))
         else
           tk(j) = 0.
         endif
@@ -107,6 +105,9 @@ contains
         soil_heat%tk_s(j)  = tk(j)
         soil_heat%cv_s(j)  = cv(j)
       enddo
+
+    print *, "thk_s"
+    print *, soil_heat%thk_s
     end associate
 
   end subroutine SoilThermalPropers

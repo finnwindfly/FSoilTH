@@ -59,4 +59,41 @@ contains
 
   end subroutine write_netcdf
 
+  subroutine write_2d_netcdf(filename, varname, dim1_name, dim2_name, data, attr_name, attr_value)
+    character(len=*), intent(in) :: filename, varname, dim1_name, dim2_name
+    real(kind=8), dimension(:,:), intent(in) :: data
+    character(len=*), intent(in) :: attr_name, attr_value
+    integer :: ncid, varid, dim1_id, dim2_id
+
+    integer :: dim1_len, dim2_len
+    dim1_len = size(data, 1)
+    dim2_len = size(data, 2)
+
+    ! Open the NetCDF file for writing
+    call check(nf90_open(filename, nf90_write, ncid), __LINE__)
+
+    ! Put the file back into define mode if it was in data mode
+    call check(nf90_redef(ncid), __LINE__)
+
+    ! Define the dimensions
+    call check(nf90_def_dim(ncid, dim1_name, dim1_len, dim1_id), __LINE__)
+    call check(nf90_def_dim(ncid, dim2_name, dim2_len, dim2_id), __LINE__)
+
+    ! Define the variable
+    call check(nf90_def_var(ncid, varname, nf90_double, (/dim1_id, dim2_id/), varid), __LINE__)
+
+    ! Define the attribute
+    call check(nf90_put_att(ncid, varid, attr_name, attr_value), __LINE__)
+
+    ! End define mode and into data mode
+    call check(nf90_enddef(ncid), __LINE__)
+
+    ! Write the variable
+    call check(nf90_put_var(ncid, varid, data), __LINE__)
+
+    ! Close the NetCDF file
+    call check(nf90_close(ncid), __LINE__)
+
+  end subroutine write_2d_netcdf
+
 end module NetcdfWriteMod
