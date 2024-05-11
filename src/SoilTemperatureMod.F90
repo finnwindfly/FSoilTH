@@ -106,8 +106,6 @@ contains
         soil_heat%cv_s(j)  = cv(j)
       enddo
 
-    print *, "thk_s"
-    print *, soil_heat%thk_s
     end associate
 
   end subroutine SoilThermalPropers
