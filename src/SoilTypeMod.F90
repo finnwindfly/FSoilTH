@@ -3,6 +3,7 @@ module SoilTypeMod
 
   use ModelParameterMod,  only : surfdataname
   use SoilParameterMod,   only : nlevsoi
+  ! use NetcdfReadMod
 
 
   implicit none
@@ -113,14 +114,14 @@ contains
     allocate(soil_text%organic_s(1:nlevsoi))
 
     ! call read_netcdf(trim(surfdataname), trim('sand'), trim('nlevsoi'), soil_text%sand_s)
-    !call read_netcdf(trim(surfdataname), trim('clay'), trim('nlevsoi'), soil_text%clay_s)
-    !call read_netcdf(trim(surfdataname), trim('organic'), trim('nlevsoi'), soil_text%organic_s)
-    soil_text%clay_s = (/8.56,11.02,8.84,10.57,7.99,9.33,7.34,5.43,3.89,1.54,4.29,9.71,9.71,&
-    9.71,9.71,9.71,9.71,9.71,9.71,9.71/)
-    soil_text%sand_s = (/35.87,29.94,34.09,41.63,49.08,48.94,52.89,68.78,78.13,91.6,&
-    77.5,50.91,50.91,50.91,50.91,50.91,50.91,50.91,50.91,50.91/)
-    soil_text%organic_s =(/129.06,81.41,56.69,21.85,19.50,13.18,12.72,7.36,3.53,&
-    2.44,2.26,2.57,2.57,2.57,2.57,2.57,2.57,2.57,2.57,2.57/)/130.0
+    ! call read_netcdf(trim(surfdataname), trim('clay'), trim('nlevsoi'), soil_text%clay_s)
+    ! call read_netcdf(trim(surfdataname), trim('organic'), trim('nlevsoi'), soil_text%organic_s)
+    ! soil_text%clay_s = (/8.56,11.02,8.84,10.57,7.99,9.33,7.34,5.43,3.89,1.54,4.29,9.71,9.71,&
+    ! 9.71,9.71,9.71,9.71,9.71,9.71,9.71/)
+    ! soil_text%sand_s = (/35.87,29.94,34.09,41.63,49.08,48.94,52.89,68.78,78.13,91.6,&
+    ! 77.5,50.91,50.91,50.91,50.91,50.91,50.91,50.91,50.91,50.91/)
+    ! soil_text%organic_s =(/129.06,81.41,56.69,21.85,19.50,13.18,12.72,7.36,3.53,&
+    ! 2.44,2.26,2.57,2.57,2.57,2.57,2.57,2.57,2.57,2.57,2.57/)/130.0
 
 
     ! Allocate soil_hydr data
