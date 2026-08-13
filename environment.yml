@@ -1,0 +1,21 @@
+name: fsoilth
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pip
+  - numpy
+  - scipy
+  - pandas
+  - xarray
+  - netcdf4
+  - h5netcdf
+  - cftime
+  - matplotlib
+  - jupyterlab
+  - mkdocs
+  - mkdocs-material
+  - pymdown-extensions
+  - f90nml

@@ -1,0 +1,18 @@
+# macOS and editor files
+.DS_Store
+.vscode/
+
+# Fortran compiler output
+*.o
+*.mod
+*.smod
+build/
+obj/
+
+# MkDocs output and local Python environments
+site/
+.venv/
+__pycache__/
+
+# Runtime output
+*.log
